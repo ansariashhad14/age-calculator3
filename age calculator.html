@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <link rel="stylesheet" href="age calculator.css">
+</head>
+
+<body>
+
+    <div class="main">
+        <h1>Age Calculator</h1>
+        <p>Date of birth</p>
+        <input type="date" id="birthdate" placeholder="dd/mm/yyyy">
+        <div class="header">
+            <div id="result"></div>
+            <div id="years">Years: 00</div>
+            <div id="months">Months: 00</div>
+            <div id="days">Days: 00</div>
+        </div>
+        <button type="button" onclick="calculate()">Calculate</button>
+    </div>
+
+    <script>
+        function calculate() {
+            const birthdate = document.getElementById('birthdate').value;
+
+            if (!birthdate) {
+                alert("Please enter a valid date");
+                return;
+            }
+
+            const birthDateObJ = new Date(birthdate);
+            const currentDate = new Date();
+
+            // Using timestamp comparison for faster calculations
+            const diffTime = currentDate - birthDateObJ;
+            const diffDate = new Date(diffTime);
+
+            // Extract years, months, and days
+            const years = diffDate.getUTCFullYear() - 1970;
+            const months = diffDate.getUTCMonth();
+            const days = diffDate.getUTCDate() - 1;
+
+            document.getElementById('years').textContent = 'Years: ' + years;
+            document.getElementById('months').textContent = 'Months: ' + months;
+            document.getElementById('days').textContent = 'Days: ' + days;
+        }
+    </script>
+
+</body>
+
+</html>
